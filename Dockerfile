@@ -1,17 +1,18 @@
 #build
 FROM golang AS build
 
-WORKDIR /go/src/github.com/zs5460/website-snapshot
+RUN go env -w GOPROXY=https://goproxy.cn,direct 
+
+WORKDIR /app
 
 ADD . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build .
+RUN CGO_ENABLED=0 GOOS=linux go build . 
 
 #production
-FROM alpine AS prod
+FROM wernight/phantomjs AS prod
 
-COPY --from=build /go/src/github.com/zs5460/website-snapshot/p . 
-COPY --from=build /go/src/github.com/zs5460/website-snapshot/p.js . 
-COPY --from=build /go/src/github.com/zs5460/website-snapshot/website-snapshot .
+COPY --from=build /app/p.js /app/ 
+COPY --from=build /app/website-snapshot /app/
 
-CMD ["./website-snapshot"]
+CMD ["/app/website-snapshot"]

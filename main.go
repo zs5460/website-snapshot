@@ -37,7 +37,7 @@ func main() {
 }
 
 func snap(url string) {
-	c := exec.Command("/bin/sh", "-c", "p.exe", "p.js", url)
+	c := exec.Command("/bin/sh", "-c", "phantomjs", "p.js", url)
 	c.Dir = filepath.Dir(os.Args[0])
 	c.Stdout = os.Stdout
 	err := c.Run()
