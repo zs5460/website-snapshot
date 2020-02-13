@@ -10,9 +10,9 @@ ADD . .
 RUN CGO_ENABLED=0 GOOS=linux go build . 
 
 #production
-FROM wernight/phantomjs AS prod
+FROM leanix/phantomjs2 AS prod
+WORKDIR /app
+COPY --from=build /app/p.js . 
+COPY --from=build /app/website-snapshot .
 
-COPY --from=build /app/p.js /app/ 
-COPY --from=build /app/website-snapshot /app/
-
-CMD ["/app/website-snapshot"]
+CMD ["./website-snapshot"]

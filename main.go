@@ -6,8 +6,6 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"path/filepath"
-	"time"
 
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
@@ -29,7 +27,7 @@ func main() {
 	}
 
 	c := cron.New()
-	spec := "0 0 11 * * ?"
+	spec := "0 * * * * ?"
 	c.AddFunc(spec, run)
 	c.Start()
 
@@ -37,8 +35,9 @@ func main() {
 }
 
 func snap(url string) {
-	c := exec.Command("/bin/sh", "-c", "phantomjs", "p.js", url)
-	c.Dir = filepath.Dir(os.Args[0])
+	log.Println("will snap ", url)
+	c := exec.Command("/bin/sh", "-c", "phantomjs", "/app/p.js", url)
+	c.Dir = "/app"
 	c.Stdout = os.Stdout
 	err := c.Run()
 	if err != nil {
@@ -63,13 +62,14 @@ func upload(localFile, key string) {
 }
 
 func run() {
-	tmpfile := filepath.Join(filepath.Dir(os.Args[0]), "tmp.png")
-	key := prefix + time.Now().Format("20060102") + ".png"
+	tmpfile := "/app/data/tmp.png"
+	log.Println("tmpfile:", tmpfile)
+	//key := prefix + time.Now().Format("200601021504") + ".png"
 	log.Println("start snapshot...")
 	snap(url)
-	log.Println("start upload...")
-	upload(tmpfile, key)
-	log.Println("start clean...")
-	os.Remove(tmpfile)
+	// log.Println("start upload...")
+	// upload(tmpfile, key)
+	// log.Println("start clean...")
+	// os.Remove(tmpfile)
 	log.Println("completed!")
 }
