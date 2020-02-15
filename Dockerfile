@@ -16,6 +16,6 @@ COPY --from=build /app/snapshot.js .
 COPY --from=build /app/website-snapshot .
 USER root
 RUN chown phantomjs:phantomjs -R /home/phantomjs/app
-
+USER phantomjs
 
 CMD ["./website-snapshot"]
