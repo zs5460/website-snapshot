@@ -34,7 +34,7 @@ func main() {
                    /_/                                
 `
 	fmt.Println(banner)
-	fmt.Printf("author:%s version:%s\n", author, version)
+	fmt.Printf("author:%s version:%s\n\n", author, version)
 
 	if accessKey == "" || secretKey == "" || bucket == "" || url == "" {
 		log.Println("Please set environment variables first.")
@@ -42,7 +42,7 @@ func main() {
 	}
 
 	c := cron.New()
-	spec := "0 * * * * ?"
+	spec := "0 0 11,18 * * ?"
 	c.AddFunc(spec, run)
 	c.Start()
 
@@ -77,12 +77,11 @@ func upload(localFile, key string) {
 
 func run() {
 	tmpfile := filepath.Join(filepath.Dir(os.Args[0]), "tmp.png")
-	key := prefix + time.Now().Format("20060102150405") + ".png"
+	key := prefix + time.Now().Format("20060102") + ".png"
 	log.Println("start snapshot...")
 	snap(url)
 	log.Println("start upload...")
 	upload(tmpfile, key)
-	log.Println("start clean...")
 	os.Remove(tmpfile)
 	log.Println("completed!")
 }
