@@ -12,6 +12,7 @@ import (
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
 	"github.com/robfig/cron"
+	"github.com/zs5460/art"
 )
 
 var (
@@ -21,19 +22,11 @@ var (
 	url       = os.Getenv("URL")
 	prefix    = "snapshot/"
 	author    = "zs5460"
-	version   = "1.0.9"
+	version   = "1.1.0"
 )
 
 func main() {
-	banner := `
-                                     __            __ 
-   _____ ____   ____   ____   _____ / /_   ____   / /_
-  / ___// __ \ / __ \ / __ \ / ___// __ \ / __ \ / __/
- (__  )/ / / // /_/ // /_/ /(__  )/ / / // /_/ // /_  
-/____//_/ /_/ \__,_// .___//____//_/ /_/ \____/ \__/  
-                   /_/                                
-`
-	fmt.Println(banner)
+	fmt.Println(art.String("snapshot"))
 	fmt.Printf("author:%s version:%s\n\n", author, version)
 
 	if accessKey == "" || secretKey == "" || bucket == "" || url == "" {

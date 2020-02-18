@@ -9,6 +9,8 @@ github.com/qiniu/x/reqid.v7
 github.com/qiniu/x/xlog.v7
 # github.com/robfig/cron v1.2.0
 github.com/robfig/cron
+# github.com/zs5460/art v0.1.0
+github.com/zs5460/art
 # golang.org/x/net v0.0.0-20200202094626-16171245cfb2
 golang.org/x/net/context
 # qiniupkg.com/x v7.0.8+incompatible
