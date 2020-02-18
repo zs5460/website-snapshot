@@ -20,23 +20,27 @@ var (
 	secretKey = os.Getenv("QINIU_SECRET_KEY")
 	bucket    = os.Getenv("QINIU_BUCKET")
 	url       = os.Getenv("URL")
+	exp       = os.Getenv("CRON_EXP")
 	prefix    = "snapshot/"
 	author    = "zs5460"
-	version   = "1.1.0"
+	version   = "1.1.2"
 )
 
 func main() {
 	fmt.Println(art.String("snapshot"))
 	fmt.Printf("author:%s version:%s\n\n", author, version)
 
-	if accessKey == "" || secretKey == "" || bucket == "" || url == "" {
+	if accessKey == "" || secretKey == "" || bucket == "" || url == "" || exp == "" {
 		log.Println("Please set environment variables first.")
 		os.Exit(1)
 	}
 
+	fmt.Println("cron exp:", exp)
+	fmt.Println("url:", url)
+
 	c := cron.New()
-	spec := "0 0 11,18 * * ?"
-	c.AddFunc(spec, run)
+	//spec := "0 0 11,18 * * ?"
+	c.AddFunc(exp, run)
 	c.Start()
 
 	select {}

@@ -21,3 +21,4 @@ QINIU_ACCESS_KEY|七牛云存取key
 QINIU_SECRET_KEY|七牛云密钥
 QINIU_BUCKET|七牛云存储桶名称
 URL|网站url
+CRON_EXP|Cron表达式，如“0 0 11,18 * * ?”

@@ -12,13 +12,14 @@ FROM wernight/phantomjs AS prod
 
 WORKDIR /home/phantomjs/app
 
-COPY --from=build /app/fonts/* /usr/share/fonts/
-COPY --from=build /app/snapshot.js . 
-COPY --from=build /app/website-snapshot .
 USER root
 RUN chown phantomjs:phantomjs -R /home/phantomjs/app && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo 'Asia/Shanghai' >/etc/timezone
 USER phantomjs
+
+COPY --from=build /app/fonts/* /usr/share/fonts/
+COPY --from=build /app/snapshot.js . 
+COPY --from=build /app/website-snapshot .
 
 ENTRYPOINT ["./website-snapshot"]
