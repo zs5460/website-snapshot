@@ -7,7 +7,7 @@ require (
 	github.com/qiniu/x v7.0.8+incompatible // indirect
 	github.com/robfig/cron v1.2.0
 	github.com/stretchr/testify v1.4.0 // indirect
-	github.com/zs5460/art v0.1.0
-	golang.org/x/net v0.0.0-20200202094626-16171245cfb2 // indirect
+	github.com/zs5460/art v0.2.0
+	golang.org/x/net v0.7.0 // indirect
 	qiniupkg.com/x v7.0.8+incompatible // indirect
 )
