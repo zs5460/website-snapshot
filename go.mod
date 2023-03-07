@@ -1,13 +1,11 @@
-module github.com/zs5460/website-snapshot
+module website-snapshot
 
-go 1.13
+go 1.20
 
 require (
-	github.com/qiniu/api.v7 v7.2.5+incompatible
-	github.com/qiniu/x v7.0.8+incompatible // indirect
+	github.com/qiniu/go-sdk/v7 v7.14.0
 	github.com/robfig/cron v1.2.0
-	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/zs5460/art v0.2.0
-	golang.org/x/net v0.7.0 // indirect
-	qiniupkg.com/x v7.0.8+incompatible // indirect
 )
+
+require golang.org/x/sync v0.0.0-20201207232520-09787c993a3a // indirect
